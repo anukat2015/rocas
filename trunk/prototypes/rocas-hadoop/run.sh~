@@ -7,8 +7,6 @@ output="output"
 #Compiling and packaging
 mvn -o clean
 mvn -o assembly:assembly -Dmaven.test.skip=true
-#Preparing dirs
-#`$HADOOP_HOME/bin/hadoop fs -put "${input}"`
-`$HADOOP_HOME/bin/hadoop fs -rmr "${output}"`
+rm -r "$output"
 #Executing
-`$HADOOP_HOME/bin/hadoop jar target/"${artifactId}-${version}"-job.jar "${input}" "${output}"`
+$HADOOP_HOME/bin/hadoop jar target/"${artifactId}-${version}"-job.jar "${input}" "${output}"

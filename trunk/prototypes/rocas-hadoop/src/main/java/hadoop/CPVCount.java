@@ -14,21 +14,19 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class WordCount {
+public class CPVCount {
 
 	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 		private final static IntWritable one = new IntWritable(1);
-		private Text word = new Text();
 
 		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 			String line = value.toString();
 			StringTokenizer tokenizer = new StringTokenizer(line,";");
-			if(tokenizer.hasMoreTokens()){
-				Text cpvCod = new Text(tokenizer.nextToken());
-				while (tokenizer.hasMoreTokens()) {
-					word.set(tokenizer.nextToken());
-					context.write(cpvCod, one);
-				}
+			Text cpvCode = new Text(tokenizer.nextToken());
+			while (tokenizer.hasMoreTokens()) {	
+				String text = tokenizer.nextToken();
+				System.out.println("Processing code "+cpvCode.toString()+" string value "+text);
+				context.write(cpvCode, one);
 			}
 		}
 	} 
@@ -45,24 +43,24 @@ public class WordCount {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-
-		JobConf conf = new JobConf(WordCount.class);
-		Job job = new Job(conf, "wordcount");
-
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
-
-		job.setMapperClass(Map.class);
-		job.setReducerClass(Reduce.class);
-
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
-
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-
-		job.waitForCompletion(true);
-	}
+//	public static void main(String[] args) throws Exception {
+//
+//		JobConf conf = new JobConf(CPVCount.class);
+//		Job job = new Job(conf, "cpvcount");
+//
+//		job.setOutputKeyClass(Text.class);
+//		job.setOutputValueClass(IntWritable.class);
+//
+//		job.setMapperClass(Map.class);
+//		job.setReducerClass(Reduce.class);
+//
+//		job.setInputFormatClass(TextInputFormat.class);
+//		job.setOutputFormatClass(TextOutputFormat.class);
+//
+//		FileInputFormat.addInputPath(job, new Path(args[0]));
+//		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+//
+//		job.waitForCompletion(true);
+//	}
 
 }
