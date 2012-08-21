@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.weso.rocas.utils.JENAUnderlyingTriples;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -46,11 +47,7 @@ public class NaiveJENAExperiment {
 		infmodel.prepare();
 		logger.info("Reasoning time: "+(System.currentTimeMillis()-executeRules)+" ms.");
 		//4-Process results
-		Map<String, String> prefixes = model.getNsPrefixMap();
-		for(String prefix:prefixes.keySet()){
-			model.removeNsPrefix(prefix);
-		}
-		model.write(System.out,"N3-TRIPLE");
+		JENAUnderlyingTriples.serializeAsUnderlyingTriples(model).write(System.out,"N3-TRIPLE");
 		//FIXME: For all goals: listObjectsOfPropert(extract goal property)
 //		NodeIterator results = infmodel.listObjectsOfProperty(model.getProperty("http://www.w3.org/2004/02/skos/core#narrower"));
 //		while(results.hasNext()){

@@ -13,7 +13,7 @@ import jena.RuleMap;
 
 import org.apache.log4j.Logger;
 import org.weso.rocas.dao.RuleDAO;
-import org.weso.rocas.dao.exception.ROCASModelException;
+import org.weso.rocas.exception.ROCASModelException;
 
 import com.hp.hpl.jena.iri.impl.Parser;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
