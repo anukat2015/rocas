@@ -1,0 +1,4 @@
+@prefix eg: <http://www.josemalvarez.es/#>.
+
+[rule1: (?a eg:p ?b) (?b eg:p ?c) -> (?a eg:p ?c)]
+[rule2: (?a eg:p ?b) (?b eg:p ?c) -> (?a eg:p ?c)]
