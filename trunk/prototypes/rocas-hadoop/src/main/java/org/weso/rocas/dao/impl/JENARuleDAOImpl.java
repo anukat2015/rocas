@@ -22,7 +22,7 @@ public class JENARuleDAOImpl implements RuleDAO {
 	
 	protected static Logger logger = Logger.getLogger(JENARuleDAOImpl.class);
 	
-	protected JENARuleDAOImpl(){
+	public JENARuleDAOImpl(){
 		super();
 	}
 
