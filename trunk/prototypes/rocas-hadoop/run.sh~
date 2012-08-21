@@ -9,4 +9,4 @@ mvn -o clean
 mvn -o assembly:assembly -Dmaven.test.skip=true
 rm -r "$output"
 #Executing
-$HADOOP_HOME/bin/hadoop jar target/"${artifactId}-${version}"-job.jar "${input}" "${output}"
+time $HADOOP_HOME/bin/hadoop jar target/"${artifactId}-${version}"-job.jar "${input}" "${output}"
