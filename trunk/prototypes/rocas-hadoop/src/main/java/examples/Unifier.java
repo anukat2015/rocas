@@ -28,6 +28,7 @@ public class Unifier {
 		List<Rule> result = store.rulesFor(goal);		
 		System.out.println(result.size());		
 		show(store.getAllRules().get(0));
+		
 	}
 
 public static void show(Rule rule){
