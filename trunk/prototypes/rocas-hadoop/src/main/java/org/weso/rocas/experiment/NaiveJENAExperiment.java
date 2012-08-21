@@ -3,6 +3,7 @@ package org.weso.rocas.experiment;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -10,6 +11,7 @@ import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.NodeIterator;
+import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
@@ -23,7 +25,7 @@ public class NaiveJENAExperiment {
 		long loadRules = 0;
 		long executeRules = 0;
 		//Data
-		InputStream stream = new FileInputStream("/home/chema/datasets/cpv-2008/cpv-2008.ttl");		
+		InputStream stream = new FileInputStream("/home/chema/datasets/cpv-2008/cpv-2008-mini.ttl");		
 		//Rules
 		String fileRules = "rules/naive-jena-rules.txt";
 		//1-Load model
@@ -44,7 +46,11 @@ public class NaiveJENAExperiment {
 		infmodel.prepare();
 		logger.info("Reasoning time: "+(System.currentTimeMillis()-executeRules)+" ms.");
 		//4-Process results
-		infmodel.setNsPrefix("skos", "http://www.w3.org/2004/02/skos/core#");
+		Map<String, String> prefixes = model.getNsPrefixMap();
+		for(String prefix:prefixes.keySet()){
+			model.removeNsPrefix(prefix);
+		}
+		model.write(System.out,"N3-TRIPLE");
 		//FIXME: For all goals: listObjectsOfPropert(extract goal property)
 //		NodeIterator results = infmodel.listObjectsOfProperty(model.getProperty("http://www.w3.org/2004/02/skos/core#narrower"));
 //		while(results.hasNext()){
