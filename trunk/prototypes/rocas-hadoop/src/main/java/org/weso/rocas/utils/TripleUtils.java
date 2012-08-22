@@ -24,6 +24,14 @@ public class TripleUtils {
 		m = null;		
 		return asTriple;
 	}
+	
+	public static Model asModel(String s){
+		Model m = ModelFactory.createDefaultModel();
+		m.read(new StringReader(s), null, INPUT_TRIPLE_FORMAT);
+		return m;
+	}
+
+
 	public static String asString(Triple t){
 		Model m = ModelFactory.createDefaultModel();
 		Resource subject = new ResourceImpl(t.getSubject().getURI());

@@ -51,7 +51,7 @@ public class FilterTriples {
 		Job job = new Job(conf, "filtertriples");
 
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+		job.setOutputValueClass(Text.class);
 
 		job.setMapperClass(Map.class);
 		job.setReducerClass(Reduce.class);
