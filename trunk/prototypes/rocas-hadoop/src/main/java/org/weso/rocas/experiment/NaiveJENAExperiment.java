@@ -28,7 +28,7 @@ public class NaiveJENAExperiment {
 		//Data
 		InputStream stream = new FileInputStream("/home/chema/datasets/cpv-2008/cpv-2008-mini.ttl");		
 		//Rules
-		String fileRules = "rules/naive-jena-rules.txt";
+		String fileRules = "rules/naive-jena.rules";
 		//1-Load model
 		loadTimer = System.currentTimeMillis();
 		Model model = ModelFactory.createDefaultModel();

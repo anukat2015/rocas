@@ -1,0 +1,41 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+
+[rdfs1: (?s ?p ?o), (?o rdf:type rdf:PlainLiteral), (?o owl:sameAs _:b) -> (_:b rdf:type rdfs:Literal)]
+[rdfs2: (?p rdfs:domain ?d), (?s ?p ?o) -> (?s rdf:type ?d)]
+[rdfs3: (?p rdfs:range ?r), (?s ?p ?o) -> (?o rdf:type ?r)]
+[rdfs4a: (?s ?p ?o) -> (?s rdf:type rdfs:Resource)]
+[rdfs4b: (?s ?p ?o) -> (?o rdf:type rdfs:Resource)]
+[rdfs5:  (?p2 rdfs:subPropertyOf ?p1), (?p1 rdfs:subPropertyOf ?p) -> (?p2 rdfs:subPropertyOf ?p)]
+[rdfs6:  (?p rdf:type rdf:Property) -> (?p rdfs:subPropertyOf ?p)]
+[rdfs7:  (?p1 rdfs:subPropertyOf ?p), (?s ?p1 ?o) -> (?s ?p ?o)]
+[rdfs9:  (?c1 rdfs:subClassOf ?c), (?i rdf:type ?c1) -> (?i rdf:type ?c)]
+[rdfs10:  (?c rdf:type rdfs:Class) -> (?c rdfs:subClassOf ?c)]
+[rdfs11:  (?c2 rdfs:subClassOf ?c1), (?c1 rdfs:subClassOf ?c) -> (?c2 rdfs:subClassOf ?c)]
+[rdfs12:  (?i rdf:type rdfs:ContainerMembershipProperty) -> (?i rdfs:subPropertyOf rdfs:member)]
+[rdfs13:  (?d rdf:type rdfs:Datatype) -> (?d rdfs:subClassOf rdfs:Literal)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
