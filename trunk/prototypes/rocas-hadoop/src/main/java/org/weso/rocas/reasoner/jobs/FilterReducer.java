@@ -2,14 +2,16 @@ package org.weso.rocas.reasoner.jobs;
 
 import java.io.IOException;
 
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.Reducer.Context;
 
-public class FilterReducer extends Reducer<Text, Text, Text, Text>{
+public class FilterReducer extends Reducer<Text, Text, Text, Text> {
 
-	protected void reduce(Text key, Iterable<Text> values,
-			org.apache.hadoop.mapreduce.Reducer.Context context)
-			throws IOException, InterruptedException {
+	public void reduce(Text key, Iterable<Text> values, Context context) 
+			throws IOException, InterruptedException{
 		super.reduce(key, values, context);
 	}
 

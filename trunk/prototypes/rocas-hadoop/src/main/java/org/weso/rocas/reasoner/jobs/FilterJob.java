@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -22,13 +23,7 @@ import examples.Node;
 public class FilterJob extends ROCASBaseJob {
 
 	public static class FilterJobMapper extends FilterMapper {
-		public void map(Object key, Text value, Context context)
-				throws IOException, InterruptedException {
-			Model m = ModelFactory.createDefaultModel();
-			m.read(value.toString(), null);
-			super.map(key, value, context);
-
-		}
+		
 	}
 	public static class FilterJobReducer extends FilterReducer{
 
@@ -40,7 +35,7 @@ public class FilterJob extends ROCASBaseJob {
 		JobInfo jobInfo = new JobInfo() {
 			@Override
 			public Class<? extends Reducer> getCombinerClass() {
-				return null;
+				return FilterJobReducer.class;
 			}
 
 			@Override
@@ -50,7 +45,7 @@ public class FilterJob extends ROCASBaseJob {
 
 			@Override
 			public Class<? extends Mapper> getMapperClass() {
-				return FilterMapper.class;
+				return FilterJobMapper.class;
 			}
 
 			@Override
@@ -65,7 +60,7 @@ public class FilterJob extends ROCASBaseJob {
 
 			@Override
 			public Class<? extends Reducer> getReducerClass() {
-				return FilterReducer.class;
+				return FilterJobReducer.class;
 			}
 		};
 
@@ -79,6 +74,12 @@ public class FilterJob extends ROCASBaseJob {
 	public int run(String[] args) throws Exception {
 		Job job;
     	job = getJobConf(args); // get the job configuration
+//    	job.setMapOutputKeyClass(IntWritable.class);
+//        job.setMapOutputValueClass(Text.class);
+//        job.setOutputKeyClass(Text.class);
+//        job.setOutputValueClass(Text.class);
+        System.out.println(args[0]);
+        System.out.println(args[1]);
 		FileInputFormat.setInputPaths(job, new Path(args[0])); // setting the input files for the job
 		FileOutputFormat.setOutputPath(job, new Path(args[1])); // setting the output files for the job
 		job.waitForCompletion(true); // wait for the job to complete
