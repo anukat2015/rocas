@@ -1,6 +1,7 @@
 package org.weso.rocas.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class JENAUnderlyingTriples {
 
 	public static void serializeAsUnderlyingTriples(String source, String target, String lang) throws FileNotFoundException{
 		Model m = ModelFactory.createDefaultModel();
-		m.read(source);
+		m.read(new FileInputStream(source), null, "TURTLE");
 		Map<String, String> prefixes = m.getNsPrefixMap();
 		for(String prefix:prefixes.keySet()){
 			m.removeNsPrefix(prefix);
@@ -22,7 +23,7 @@ public class JENAUnderlyingTriples {
 		m.close();
 		m = null;		
 	}
-	public static Model serializeAsUnderlyingTriples(Model source) throws FileNotFoundException{
+	public static Model serializeAsUnderlyingTriples(Model source){
 		Model m = ModelFactory.createDefaultModel();
 		m.add(source);
 		Map<String, String> prefixes = m.getNsPrefixMap();
@@ -30,5 +31,11 @@ public class JENAUnderlyingTriples {
 			m.removeNsPrefix(prefix);
 		}
 		return m;		
+	}
+	
+	public static void main(String []args) throws FileNotFoundException{
+		String source = "/home/chema/datasets/cpv-2008/cpv-2008-mini.ttl";
+		String target = "/home/chema/datasets/cpv-2008/cpv-2008-mini-ut.ttl";
+		serializeAsUnderlyingTriples(source, target, null);
 	}
 }
