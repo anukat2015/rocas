@@ -8,14 +8,10 @@ import org.weso.rocas.utils.TripleUtils;
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
-import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
-import com.hp.hpl.jena.reasoner.rulesys.LPBackwardRuleInfGraph;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.reasoner.rulesys.impl.LPRuleStore;
 import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 public class MainBRuleEngine {
 
@@ -23,7 +19,7 @@ public class MainBRuleEngine {
 
 		List<Rule> rules = getRules();
 		
-		Model rawModel = FileManager.get().loadModel("file:model/cpv-2008-mini-ut.ttl");
+		Model rawModel = getDataModel();
 //		System.out.println("High-level implementation");
 //		Model configurationModel = ModelFactory.createDefaultModel();
 //		Resource configuration = configurationModel.createResource();
@@ -57,9 +53,6 @@ public class MainBRuleEngine {
 		return new JENARuleDAOImpl().parseRulesFromClasspath("rules/naive-jena.rules");
 	}
 	private static Model getDataModel() {
-		Model model = ModelFactory.createDefaultModel();
-		model.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("model/cpv-2008-mini-ut.ttl"), 
-				TripleUtils.INPUT_TRIPLE_FORMAT);
-		return model;
+		return FileManager.get().loadModel("file:model/cpv-2008-mini-ut.ttl");
 	}
 }
