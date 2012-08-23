@@ -13,13 +13,13 @@ public class JENAUnderlyingTriples {
 
 	public static void serializeAsUnderlyingTriples(String source, String target, String lang) throws FileNotFoundException{
 		Model m = ModelFactory.createDefaultModel();
-		m.read(new FileInputStream(source), null, "TURTLE");
+		m.read(new FileInputStream(source), null, TripleUtils.INPUT_TRIPLE_FORMAT);
 		Map<String, String> prefixes = m.getNsPrefixMap();
 		for(String prefix:prefixes.keySet()){
 			m.removeNsPrefix(prefix);
 		}
 		FileOutputStream os = new FileOutputStream(new File(target));
-		m.write(os, (lang == null?"N3-TRIPLE":lang));
+		m.write(os, (lang == null?TripleUtils.OUTPUT_TRIPLE_FORMAT:lang));
 		m.close();
 		m = null;		
 	}

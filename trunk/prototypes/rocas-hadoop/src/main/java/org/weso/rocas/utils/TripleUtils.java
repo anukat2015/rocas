@@ -14,8 +14,8 @@ import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
 
 public class TripleUtils {
-	private static final String OUTPUT_TRIPLE_FORMAT = "N3-TRIPLE";
-	private static final String INPUT_TRIPLE_FORMAT = "TURTLE";
+	public static final String OUTPUT_TRIPLE_FORMAT = "N3-TRIPLE";
+	public static final String INPUT_TRIPLE_FORMAT = "TURTLE";
 	public static Triple asTriple(String s){
 		Model m = ModelFactory.createDefaultModel();
 		m.read(new StringReader(s), null, INPUT_TRIPLE_FORMAT);
