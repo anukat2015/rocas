@@ -18,6 +18,10 @@ public class RuleCompositeNode extends RuleNode{
 		// TODO Auto-generated constructor stub
 	}
 
+	public RuleCompositeNode(Rule rule, ClauseEntry clause, String name) {
+		super(rule,clause,name);
+	}
+
 	public List<RuleNode> getChildren() {
 		if(children == null){
 			this.children = new LinkedList<RuleNode>();
@@ -28,6 +32,8 @@ public class RuleCompositeNode extends RuleNode{
 	public void setChildren(List<RuleNode> children) {
 		this.children = children;
 	}
+
+
 	
 	
 }

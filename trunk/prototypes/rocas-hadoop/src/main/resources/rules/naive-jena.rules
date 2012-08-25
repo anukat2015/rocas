@@ -1,5 +1,6 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 
-[rule1: (?a skos:broader ?b) -> (?b skos:narrower ?a)]
+[rule1: (?a skos:broader ?b), (?a rdf:type FOO), (?a rdf:type FO2)  -> (?b skos:narrower ?a)]
 [rule2: (?a rdf:type skos:Concept), (?b rdfs:label ?label) -> (?a skos:broader ?b)]
-[rule3: (?a rdf:type skos:FOO) -> (?a skos:broader ?b)]
+[rule3: (?b rdfs:label ?BAR) -> (?a skos:broader ?b)]
+
