@@ -81,14 +81,14 @@
 		<!-- Specs (Behavior Driven Testing through JUnit) -->
 		<!-- <dependency> <groupId>org.scala-tools.testing</groupId> <artifactId>specs</artifactId> 
 			<version>1.6.1-2.8.0.Beta1-RC1</version> <scope>test</scope> </dependency> -->
-<!--Hadoop Maven Plugin-->
+		<!--Hadoop Maven Plugin -->
 
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>12.0</version>
 		</dependency>
-			
+
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
@@ -101,6 +101,15 @@
 			<version>1.8.5</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Tests -->
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-core</artifactId>
+		<version>1.9.0</version>
+		<scope>test</scope>
+	</dependency>
+
 	</dependencies>
 
 
@@ -228,8 +237,8 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
-	<plugin>
-			  <artifactId>maven-assembly-plugin</artifactId>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.2-beta-5</version>
 				<configuration>
 					<descriptors>
