@@ -12,9 +12,6 @@ import org.apache.hadoop.mapred.Reporter;
 
 public class N3TripleInputFormat extends  FileInputFormat<Text, N3Triple> {
 
-
-
-
 	public RecordReader<Text, N3Triple> getRecordReader(
 			InputSplit input, JobConf job, Reporter reporter)
 					throws IOException {
