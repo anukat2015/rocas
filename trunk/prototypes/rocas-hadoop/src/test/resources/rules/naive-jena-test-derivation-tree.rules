@@ -1,0 +1,4 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+
+[rule1: (?a skos:broader ?b)  -> (?b skos:narrower ?a)]
+[rule2: (?a skos:broader ?b)  -> (?b skos:narrower ?a)]

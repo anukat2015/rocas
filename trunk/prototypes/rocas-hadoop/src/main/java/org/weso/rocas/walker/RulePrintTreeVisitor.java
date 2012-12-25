@@ -13,8 +13,6 @@ import org.weso.rocas.model.RuleNodeLeaf;
 import org.weso.rocas.model.RuleORNode;
 
 import com.hp.hpl.jena.graph.Node;
-import com.hp.hpl.jena.reasoner.TriplePattern;
-import com.hp.hpl.jena.reasoner.rulesys.ClauseEntry;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.reasoner.rulesys.impl.LPRuleStore;
 import com.hp.hpl.jena.reasoner.rulesys.impl.oldCode.inherited.RuleInstance;
@@ -115,38 +113,16 @@ public class RulePrintTreeVisitor extends RuleVisitor{
 		//Create derivation tree of the first rule		
 		Rule rule = rules.get(0);
 
-		RuleNode root =	extractCollectClauses(rs, rule, rule.getHeadElement(0), 0);
+		RuleNode root =	RuleNode.extractCollectClauses(rs, rule, rule.getHeadElement(0), 0);
 		RulePrintTreeVisitor visitor = new RulePrintTreeVisitor();
 		visitor.visit(root,0);
 	}
 
-	private static int getCount(){
+	public static int getCount(){
 		return count++;
 	}
 
 	private static int count = 0;
-	
-	private static RuleNode extractCollectClauses(LPRuleStore rs, Rule rule, ClauseEntry clauseEntry, int level) {
-		RuleNode parent = null;
-		List<Rule> rulesFor = rs.rulesFor((TriplePattern) clauseEntry);
-		if(rulesFor.size()==0){
-			parent = new RuleNodeLeaf(rule, clauseEntry, "l"+getCount());
-		}else {		
-			parent = new RuleORNode(rule,clauseEntry, "o"+getCount());
-			for(Rule childRule:rulesFor){
-				RuleNode child = new RuleANDNode(childRule, clauseEntry,"a"+getCount());
-				for(int i = 0; i<childRule.getBody().length;i++){
-					RuleNode andClause = extractCollectClauses(rs, 
-											childRule, 
-											childRule.getBodyElement(i), 
-											level+1);
-					((RuleCompositeNode) child).getChildren().add(andClause);
-				}
-				((RuleCompositeNode) parent).getChildren().add(child);
-			}
-		}	
-		return parent;
-	}
 
 
 
