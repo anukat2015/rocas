@@ -43,7 +43,12 @@ public class SPARQLTripleMatch{
 	public static String formatNode(Node node) {
 		if(node.isURI()){
 			return "<"+node.getURI()+">";
-		}else		return node.toString();
+		} if (node.isVariable()){	
+			//FIXME: hack. In rules preload ? but when manually create a node not!
+			if(node.getName().startsWith("?")){
+				return node.getName();	
+			}else return "?"+node.getName();			
+		}else	return node.toString();
 		
 	}
 	

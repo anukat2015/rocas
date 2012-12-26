@@ -1,0 +1,7 @@
+<http://purl.org/weso/pscs/cpv/2008/resource/42141130> <http://www.w3.org/2004/02/skos/core#inScheme> <http://purl.org/weso/pscs/cpv/2008/resource/ds> .
+<http://purl.org/weso/pscs/cpv/2008/resource/42141130> <http://www.w3.org/2004/02/skos/core#broader> <http://purl.org/weso/pscs/cpv/2008/resource/42141100> .
+<http://purl.org/weso/pscs/cpv/2008/resource/42141130> <http://purl.org/dc/elements/1.1/identifier> "42141130"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://purl.org/weso/pscs/cpv/2008/resource/42141130> a        <http://purl.org/goodrelations/v1#ProductOrServiceModel> .
+<http://purl.org/weso/pscs/cpv/2008/resource/42141130> a        <http://purl.org/weso/pscs/cpv/ontology/Category> .
+<http://purl.org/weso/pscs/cpv/2008/resource/42141131> <http://www.w3.org/2004/02/skos/core#broader> <http://purl.org/weso/pscs/cpv/2008/resource/42141100> .
+<http://purl.org/weso/pscs/cpv/2008/resource/42141132> <http://www.w3.org/2004/02/skos/core#broader> <http://purl.org/weso/pscs/cpv/2008/resource/42141100> .

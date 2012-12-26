@@ -27,7 +27,6 @@ public class NaiveReasonerMainTest {
 	public void testOneGoalInFacts() {
 		//1-Create rulebase
 		List<Rule> rules = new JENARuleDAOImpl().parseRulesFromClasspath("rules/naive-skos.rules");
-		LPRuleStore rs = new LPRuleStore(rules);				
 		//2-Read list of facts
 		Model rawModel = FileManager.get().loadModel("facts/naive-skos-facts.ttl");
 		//3-Choose a random goal
@@ -36,7 +35,9 @@ public class NaiveReasonerMainTest {
 		StmtIterator iter = rawModel.listStatements();
 		while(iter.hasNext()){
 			Statement stm = iter.nextStatement();
-			if(goal.compatibleWith(new TriplePattern(stm.asTriple()))){
+			TriplePattern factPattern = new TriplePattern(stm.asTriple());
+			System.out.println("Goal "+goal+" fact pattern "+factPattern);
+			if(goal.compatibleWith(factPattern)){
 				QuerySolution[] result = SPARQLTripleMatch.getSubstitutions(goal, stm);
 				assertEquals(1, result.length);
 //				for(int i = 0; i<result.length;i++){

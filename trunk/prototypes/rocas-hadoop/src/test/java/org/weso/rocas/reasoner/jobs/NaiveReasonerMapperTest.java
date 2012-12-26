@@ -17,7 +17,7 @@ public class NaiveReasonerMapperTest {
 
 	@Test
 	public void test() throws IOException {
-		NaiveReasonerMapper mapper = new NaiveReasonerMapper();
+		NaiveN3ReasonerMapper mapper = new NaiveN3ReasonerMapper();
 		Text object = new Text("o");
 		Text predicate = new Text("p");
 		Text subject = new Text("s");
