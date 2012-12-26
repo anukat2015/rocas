@@ -20,8 +20,7 @@ public class NaiveN3ReasonerMapper extends N3Mapper{
 			throws IOException, InterruptedException {
 		System.out.println("Map");
 		if(SPARQLTripleMatch.accept(value.toString(),this.filter)){
-			
-				context.write(value,value);
+			context.write(value,value);
 			}
 		}
 

@@ -31,6 +31,11 @@ public class TripleUtils {
 		return m;
 	}
 
+	public static Model asModel(Triple t){
+		Model m = ModelFactory.createDefaultModel();
+		m.read(new StringReader(t.toString()), null, INPUT_TRIPLE_FORMAT);
+		return m;
+	}
 
 	public static String asString(Triple t){
 		Model m = ModelFactory.createDefaultModel();

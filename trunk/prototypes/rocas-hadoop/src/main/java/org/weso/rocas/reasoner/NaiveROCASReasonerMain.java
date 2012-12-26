@@ -34,6 +34,13 @@ public class NaiveROCASReasonerMain {
 		//Common and static parts
 		List<Rule> rules = new JENARuleDAOImpl().parseRulesFromClasspath("rules/naive-basic-reasoner.rules");
 		LPRuleStore rs = new LPRuleStore(rules);
+		//First M/R: see if the goal matches facts
+		Model rawModel = FileManager.get().loadModel("facts/naive-basic-reasoner-skos-facts.ttl");
+		//Dynamic parts (file to be processed) in map/reduce jobs
+		//Map execution
+		checkGoalsAndFacts(goalFactory, rawModel);
+		//Reduce execution
+		//if not add new goals and repeat
 		List<Rule> matchedRules = rs.rulesFor(goalPattern);
 		for(Rule rule: matchedRules){
 			System.out.println("Matched rule "+rule);
@@ -43,21 +50,23 @@ public class NaiveROCASReasonerMain {
 				goalFactory.addGoal((TriplePattern) newGoal);
 			}
 		}
-		//Dynamic parts (file to be processed) in map/reduce jobs
-		Model rawModel = FileManager.get().loadModel("facts/naive-basic-reasoner-skos-facts.ttl");
-		//Map execution
+		checkGoalsAndFacts(goalFactory, rawModel);
+
+		
+	}
+
+	private static void checkGoalsAndFacts(GoalFactory goalFactory,
+			Model rawModel) {
 		StmtIterator iter = rawModel.listStatements();
 		while(iter.hasNext()){
 			Statement stm = iter.nextStatement();
 			TriplePattern factPattern = new TriplePattern(stm.asTriple());			
 			for(TriplePattern goal:goalFactory.listGoals()){
 				if(factPattern.compatibleWith(goal)){
+					System.out.println("Compatible");
 					QuerySolution[] result = SPARQLTripleMatch.getSubstitutions(goal, stm);
 				}
 			}
 		}
-		//Reduce execution
-
-		
 	}
 }

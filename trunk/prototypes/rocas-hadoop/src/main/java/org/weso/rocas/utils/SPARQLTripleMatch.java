@@ -5,7 +5,13 @@ import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.query.* ;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
+import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
+import com.hp.hpl.jena.rdf.model.impl.StatementImpl;
 import com.hp.hpl.jena.reasoner.TriplePattern;
 
 public class SPARQLTripleMatch{
@@ -40,6 +46,16 @@ public class SPARQLTripleMatch{
 		return SPARQLUtils.executeSimpleSparql(model, queryString);
 	}
 
+
+	public static QuerySolution[] getSubstitutions(TriplePattern goalPattern,
+			TriplePattern factPattern) {
+		Resource subject = new ResourceImpl(factPattern.getSubject().getURI());
+		Resource object = new ResourceImpl(factPattern.getObject().getURI());
+		Property predicate = new PropertyImpl(factPattern.getPredicate().getURI());
+		return getSubstitutions(goalPattern, new StatementImpl(subject, predicate , object));
+		
+	}
+
 	public static String formatNode(Node node) {
 		if(node.isURI()){
 			return "<"+node.getURI()+">";
@@ -50,7 +66,6 @@ public class SPARQLTripleMatch{
 			}else return "?"+node.getName();			
 		}else	return node.toString();
 		
-	}
-	
+	}	
 	
 }
