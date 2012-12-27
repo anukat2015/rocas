@@ -1,12 +1,9 @@
 package org.weso.rocas.reasoner;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.List;
 
 import org.weso.rocas.dao.impl.JENARuleDAOImpl;
 import org.weso.rocas.model.GoalFactory;
-import org.weso.rocas.model.RuleNode;
 import org.weso.rocas.model.TripleGoalFactory;
 import org.weso.rocas.utils.SPARQLTripleMatch;
 
